@@ -26,9 +26,10 @@ export default async function generateComponent(
 export const AssetComponents = {
 ${assets.map(
   (f) =>
-    `"${f}": ${componentCreator(
+    `
+  "${f}": ${componentCreator(
       getAssetPath(f, opts!.outputDir!, opts?.assetUrl)
-    )}`
+    )},`
 )}
 }  
 `;
