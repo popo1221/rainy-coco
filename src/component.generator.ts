@@ -14,7 +14,7 @@ export interface GenerateComponentOptions {
 const defaultComponentCreator: ComponentCreator = (assetPath) => `(props) => ${
   isUrl(assetPath)
     ? `<img {...props} src="${assetPath}" />`
-    : `<img {...props} src={require(${assetPath})} />`
+    : `<img {...props} src={require("${assetPath}")} />`
 }
 `;
 export default async function generateComponent(
