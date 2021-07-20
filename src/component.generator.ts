@@ -29,7 +29,7 @@ ${assets.map(
     `
   "${f}": ${componentCreator(
       getAssetPath(f, opts!.outputDir!, opts?.assetUrl)
-    )},`
+    )}`
 )}
 }  
 `;
