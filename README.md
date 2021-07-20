@@ -19,7 +19,7 @@ $ npm install -g rainy-coco
 $ rainy-coco COMMAND
 running command...
 $ rainy-coco (-v|--version|version)
-rainy-coco/0.1.0 darwin-x64 node-v14.16.0
+rainy-coco/0.1.1 darwin-x64 node-v14.16.0
 $ rainy-coco --help [COMMAND]
 USAGE
   $ rainy-coco COMMAND

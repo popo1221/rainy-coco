@@ -1,7 +1,7 @@
 {
   "name": "rainy-coco",
   "description": "A tool to automatically generate assets components for react.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "popo1221",
   "bin": {
     "rainy-coco": "./bin/run"

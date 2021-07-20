@@ -46,7 +46,11 @@ export default async function rainyCoco(opts: RainyCocoOptions) {
   );
 
   // Deal with components
-  const components = await generateComponent(assets, opts.component);
+  const components = await generateComponent(assets, {
+    assetUrl: opts.assetUrl,
+    outputDir: opts.outputDir,
+    ...opts.component,
+  });
   writeFileSync(
     `${join(opts.outputDir, opts.component!.filename!)}`,
     components
