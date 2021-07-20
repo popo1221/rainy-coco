@@ -18,14 +18,14 @@ export default async function generateComponent(
   opts?: GenerateComponentOptions
 ): Promise<string> {
   const componentCreator = opts?.componentCreator ?? defaultComponentCreator;
-  return `${opts?.preimport}
+  return `${opts?.preimport ?? ""}
 export const AssetComponents = {
 ${assets.map(
   (f) =>
     `"${f}": ${componentCreator(
       isUrl(opts?.assetUrl ?? "")
         ? `${opts?.assetUrl}${f}`
-        : relative(f, opts!.outputDir!)
+        : relative(opts!.outputDir!, f)
     )}`
 )}
 }  

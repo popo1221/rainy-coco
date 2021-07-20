@@ -57,7 +57,7 @@ export default async function generateBackground(
     className(f),
     isUrl(opts?.assetUrl ?? "")
       ? `${opts?.assetUrl}${f}`
-      : relative(f, opts!.outputDir!),
+      : relative(opts!.outputDir!, f),
   ]);
 
   return {
