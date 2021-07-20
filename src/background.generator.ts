@@ -1,6 +1,7 @@
 import isUrl = require("is-url");
 import { customAlphabet } from "nanoid";
 import { relative } from "path";
+import { getAssetPath } from "./utils";
 
 export interface GenerateBackgroundOptions {
   importCss: string;
@@ -55,9 +56,7 @@ export default async function generateBackground(
   const assetData: Tuple<string, string, string>[] = assets.map((f) => [
     f,
     className(f),
-    isUrl(opts?.assetUrl ?? "")
-      ? `${opts?.assetUrl}${f}`
-      : relative(opts!.outputDir!, f),
+    getAssetPath(f, opts!.outputDir!, opts?.assetUrl),
   ]);
 
   return {

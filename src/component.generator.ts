@@ -1,5 +1,6 @@
 import isUrl = require("is-url");
 import { relative } from "path";
+import { getAssetPath } from "./utils";
 
 export type ComponentCreator = (assetPath: string) => string;
 
@@ -10,9 +11,12 @@ export interface GenerateComponentOptions {
   componentCreator?: ComponentCreator;
 }
 
-const defaultComponentCreator: ComponentCreator = (assetPath) =>
-  `<img src="${assetPath}" />`;
-
+const defaultComponentCreator: ComponentCreator = (assetPath) => `(props) => ${
+  isUrl(assetPath)
+    ? `<img {...props} src="${assetPath}" />`
+    : `<img {...props} src={require(${assetPath})} />`
+}
+`;
 export default async function generateComponent(
   assets: string[],
   opts?: GenerateComponentOptions
@@ -23,9 +27,7 @@ export const AssetComponents = {
 ${assets.map(
   (f) =>
     `"${f}": ${componentCreator(
-      isUrl(opts?.assetUrl ?? "")
-        ? `${opts?.assetUrl}${f}`
-        : relative(opts!.outputDir!, f)
+      getAssetPath(f, opts!.outputDir!, opts?.assetUrl)
     )}`
 )}
 }  
