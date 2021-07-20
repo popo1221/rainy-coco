@@ -1,6 +1,11 @@
+import isUrl = require("is-url");
 import { customAlphabet } from "nanoid";
+import { relative } from "path";
 
 export interface GenerateBackgroundOptions {
+  importCss: string;
+  assetUrl?: string;
+  outputDir?: string;
   className?: (assert: string) => string;
 }
 interface GenerateBackgroundReturnType {
@@ -8,31 +13,34 @@ interface GenerateBackgroundReturnType {
   classNameMap: string;
 }
 
-type Tuple<T, S> = [T, S];
+type Tuple<T, S, X> = [T, S, X];
 
 const defaultClassName = customAlphabet(
   "0123456789abcdefghijklmnopkrstuvwxyzABCDEFGHIJKLMNOPKRSTUVWXYZ",
   5
 );
 
-function generateStyleContent(data: Tuple<string, string>[]) {
+function generateStyleContent(data: Tuple<string, string, string>[]) {
   return `
 ${data.map(
-  ([file, className]) => `
+  ([_, className, url]) => `
 .${className} {
-  background-image: url("${file}")
+  background-image: url("${url}")
 }
 `
 )}  
 `;
 }
 
-function generateClassNameMap(data: Tuple<string, string>[]) {
-  return `
+function generateClassNameMap(
+  data: Tuple<string, string, string>[],
+  importCss: string
+) {
+  return `${importCss}
 export const Backgrounds = {
   ${data.map(
-    ([f, className]) => `
-  "${f}": "${className}",
+    ([key, className]) => `
+  "${key}": "${className}",
 `
   )}
 } 
@@ -43,12 +51,17 @@ export default async function generateBackground(
   assets: string[],
   opts?: GenerateBackgroundOptions
 ): Promise<GenerateBackgroundReturnType> {
-  const assetData: Tuple<string, string>[] = assets.map((f) => [
+  const className = opts?.className ?? defaultClassName;
+  const assetData: Tuple<string, string, string>[] = assets.map((f) => [
     f,
-    defaultClassName(),
+    className(f),
+    isUrl(opts?.assetUrl ?? "")
+      ? `${opts?.assetUrl}${f}`
+      : relative(f, opts!.outputDir!),
   ]);
+
   return {
     styleContent: generateStyleContent(assetData),
-    classNameMap: generateClassNameMap(assetData),
+    classNameMap: generateClassNameMap(assetData, opts!.importCss),
   };
 }

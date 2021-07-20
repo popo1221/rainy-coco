@@ -30,7 +30,12 @@ export default async function rainyCoco(opts: RainyCocoOptions) {
   );
 
   // Deal with backgrounds
-  const backgrounds = await generateBackground(assets, opts.background);
+  const backgrounds = await generateBackground(assets, {
+    assetUrl: opts.assetUrl,
+    outputDir: opts.outputDir,
+    importCss: `import "./${opts.background!.styleFilename}";`,
+    ...opts.background,
+  });
   writeFileSync(
     `${join(opts.outputDir, opts.background!.styleFilename!)}`,
     backgrounds.styleContent

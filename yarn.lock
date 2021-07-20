@@ -152,6 +152,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/is-url@^1.2.30":
+  version "1.2.30"
+  resolved "https://registry.nlark.com/@types/is-url/download/@types/is-url-1.2.30.tgz?cache=0&sync_timestamp=1625799029818&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fis-url%2Fdownload%2F%40types%2Fis-url-1.2.30.tgz#85567e8bee4fee69202bc3448f9fb34b0d56c50a"
+  integrity sha1-hVZ+i+5P7mkgK8NEj5+zSw1WxQo=
+
 "@types/json-schema@^7.0.3":
   version "7.0.8"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.8.tgz#edf1bf1dbf4e04413ca8e5b17b3b7d7d54b59818"
@@ -1229,6 +1234,11 @@ is-typedarray@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
   integrity sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+
+is-url@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.npm.taobao.org/is-url/download/is-url-1.2.4.tgz#04a4df46d28c4cff3d73d01ff06abeb318a1aa52"
+  integrity sha1-BKTfRtKMTP89c9Af8Gq+sxihqlI=
 
 is-wsl@^2.1.1, is-wsl@^2.2.0:
   version "2.2.0"

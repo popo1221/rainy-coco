@@ -1,18 +1,17 @@
 import { cosmiconfig } from "cosmiconfig";
-import defaults = require("defaults");
 import { GenerateBackgroundOptions } from "./background.generator";
 import {
   ComponentCreator,
   GenerateComponentOptions,
 } from "./component.generator";
 
-export interface BackgroundConfiguration extends GenerateBackgroundOptions {
+export interface BackgroundConfiguration {
   className?: (assert: string) => string;
   styleFilename?: string;
   tsFilename?: string;
 }
 
-export interface ComponentConfiguration extends GenerateComponentOptions {
+export interface ComponentConfiguration {
   preimport?: string;
   componentCreator?: ComponentCreator;
   filename?: string;

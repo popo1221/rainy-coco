@@ -1,6 +1,11 @@
+import isUrl = require("is-url");
+import { relative } from "path";
+
 export type ComponentCreator = (assetPath: string) => string;
 
 export interface GenerateComponentOptions {
+  assetUrl?: string;
+  outputDir?: string;
   preimport?: string;
   componentCreator?: ComponentCreator;
 }
@@ -15,7 +20,14 @@ export default async function generateComponent(
   const componentCreator = opts?.componentCreator ?? defaultComponentCreator;
   return `${opts?.preimport}
 export const AssetComponents = {
-${assets.map((f) => `"${f}": ${componentCreator(f)}`)}
+${assets.map(
+  (f) =>
+    `"${f}": ${componentCreator(
+      isUrl(opts?.assetUrl ?? "")
+        ? `${opts?.assetUrl}${f}`
+        : relative(f, opts!.outputDir!)
+    )}`
+)}
 }  
 `;
 }

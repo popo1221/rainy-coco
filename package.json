@@ -1,7 +1,7 @@
 {
   "name": "rainy-coco",
   "description": "A tool to automatically generate assets components for react.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "popo1221",
   "bin": {
     "rainy-coco": "./bin/run"
@@ -12,10 +12,12 @@
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^3",
     "@types/defaults": "^1.0.3",
+    "@types/is-url": "^1.2.30",
     "cosmiconfig": "^7.0.0",
     "defaults": "^1.0.3",
     "globby": "^11.0.4",
     "hasha": "^5.2.2",
+    "is-url": "^1.2.4",
     "nanoid": "^3.1.23",
     "tslib": "^1"
   },
